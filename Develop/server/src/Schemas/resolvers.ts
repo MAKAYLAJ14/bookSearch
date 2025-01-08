@@ -1,7 +1,7 @@
-import User from '../models/User.js'; // Adjust the path to your User model
+import User from '../models/User.ts'; 
 import jwt from 'jsonwebtoken'; // For token generation
 
-const secret = 'your_secret_key'; // Replace with your actual secret key
+const secret = process.env.JWT_SECRET_KEY || ''; 
 
 export const resolvers = {
   Query: {
