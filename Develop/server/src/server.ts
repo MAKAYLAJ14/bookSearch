@@ -27,7 +27,10 @@ const startServer = async () => {
   app.use(express.json());
 
   // Use Apollo Server as middleware for the Express app
-  app.use('/graphql', expressMiddleware(server)); 
+  app.use('/graphql', expressMiddleware(server as any,
+    {context: authenticateToken as any}
+
+  )); 
   
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
