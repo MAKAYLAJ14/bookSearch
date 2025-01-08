@@ -16,13 +16,13 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/graphql": "^14.2.3",
-    "@types/node": "^22.10.5",
-    "concurrently": "^8.2.0"
+    "@types/node": "^22.10.5"
   },
   "dependencies": {
     "@apollo/client": "^3.12.4",
     "@apollo/server": "^4.11.3",
     "apollo-server-express": "^3.13.0",
+    "concurrently": "^9.1.2",
     "graphql": "^16.10.0"
   }
 }
