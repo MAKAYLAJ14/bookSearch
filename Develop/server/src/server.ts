@@ -5,6 +5,7 @@ import routes from './routes/index.js';
 import { ApolloServer } from '@apollo/server';
 import { typeDefs, resolvers } from './Schemas';
 import { expressMiddleware } from '@apollo/server/express4';
+import { authenticateToken } from './services/auth.js'
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,15 +16,6 @@ const server = new ApolloServer({
   resolvers,
 });
 
-// Middleware for parsing application/json
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Serve client/build as static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
-
 // Use routes
 app.use(routes);
 
@@ -31,8 +23,17 @@ app.use(routes);
 const startServer = async () => {
   await server.start(); // Start the Apollo Server
 
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+
   // Use Apollo Server as middleware for the Express app
-  app.use('/graphql', expressMiddleware(server)); 
+  app.use('/graphql', expressMiddleware(server as any,
+    {context: authenticateToken}
+  )); 
+  
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
 
   // Connect to the database and start the server
   db.once('open', () => {

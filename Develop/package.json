@@ -15,7 +15,6 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/graphql": "^14.2.3",
     "@types/node": "^22.10.5"
   },
   "dependencies": {
