@@ -11,7 +11,7 @@ import {
 
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
-import { SAVE_BOOK } from '../mutations'; // Import the SAVE_BOOK mutation
+import { SAVE_BOOK } from '../utils/mutations'; // Import the SAVE_BOOK mutation
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import type { Book } from '../models/Book';
 import type { GoogleAPIBook } from '../models/GoogleAPIBook';
