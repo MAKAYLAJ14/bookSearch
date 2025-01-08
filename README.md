@@ -2,8 +2,13 @@
 
 ## Usage 
 ```md
-Mongo db
+MERN stack
+React front end
+MongoDB database
+Node.js/Express.js
 ```
+## Goal of Project
+This week, I was to take a fully functioning Google Books API search engine built with a RESTful API, and refactor it to be a GraphQL API built with Apollo Server.
 
 ## User Story
 
