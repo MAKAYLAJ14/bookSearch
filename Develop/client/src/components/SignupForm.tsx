@@ -3,15 +3,15 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations'; 
+import Auth from '../utils/auth'; 
 
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
-const SignupForm = ({}: { handleModalClose: () => void }) => {
-  // set initial form state
+const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedBooks: [] });
-  // set state for form validation
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+
+  // Use the useMutation hook to create the createUser function
+  const [createUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -21,7 +21,6 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -29,14 +28,15 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
     }
 
     try {
-      const response = await createUser(userFormData);
+      const { data } = await createUser({ variables: { user: userFormData } });
 
-      if (!response.ok) {
+      if (!data.addUser) {
         throw new Error('something went wrong!');
       }
 
-      const { token } = await response.json();
+      const { token } = data.addUser;
       Auth.login(token);
+      handleModalClose(); // Close the modal after successful signup
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -52,9 +52,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
         </Alert>
