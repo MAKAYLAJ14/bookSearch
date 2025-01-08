@@ -1,7 +1,7 @@
-import { gql } from 'apollo-server-express';
+
 
 // Define your GraphQL schema using the gql template literal
-export const typeDefs = gql`
+export const typeDefs = `
   type User {
     _id: ID!
     username: String!
