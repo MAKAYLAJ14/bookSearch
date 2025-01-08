@@ -32,7 +32,7 @@ const startServer = async () => {
   await server.start(); // Start the Apollo Server
 
   // Use Apollo Server as middleware for the Express app
-  app.use('/graphql', expressMiddleware(server)); // Use createHandler for Apollo Server 4.x
+  app.use('/graphql', expressMiddleware(server)); 
 
   // Connect to the database and start the server
   db.once('open', () => {
