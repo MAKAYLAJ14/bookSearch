@@ -6,10 +6,10 @@ import {
   saveBook,
   deleteBook,
   login,
-} from '../../controllers/user-controller.ts';
+} from '../../controllers/user-controller.js';
 
 // import middleware
-import { authenticateToken } from '../../services/auth.ts';
+import { authenticateToken } from '../../services/auth.js';
 
 // put authMiddleware anywhere we need to send a token for verification of user
 router.route('/').post(createUser).put(authenticateToken, saveBook);

@@ -1,4 +1,4 @@
-import User from '../models/User.ts'; 
+import User from '../models/User.js'; 
 import jwt from 'jsonwebtoken'; // For token generation
 
 const secret = process.env.JWT_SECRET_KEY || ''; 

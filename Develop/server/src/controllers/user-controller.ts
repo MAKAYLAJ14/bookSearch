@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 // import user model
-import User from '../models/User.ts';
+import User from '../models/User.js';
 // import sign token function from auth
-import { signToken } from '../services/auth.ts';
+import { signToken } from '../services/auth.js';
 
 // get a single user by either their id or their username
 export const getSingleUser = async (req: Request, res: Response) => {
