@@ -3,7 +3,7 @@ import path from 'node:path';
 import db from './config/connection.js';
 import routes from './routes/index.js';
 import { ApolloServer } from '@apollo/server';
-import { typeDefs, resolvers } from './Schemas';
+import { typeDefs, resolvers } from './Schemas/index.js';
 import { expressMiddleware } from '@apollo/server/express4';
 import { authenticateToken } from './services/auth.js'
 
