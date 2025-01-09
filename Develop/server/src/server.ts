@@ -38,7 +38,7 @@ const startServer = async () => {
   )); 
   
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../../client/build')));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
   }
 
   // Connect to the database and start the server
